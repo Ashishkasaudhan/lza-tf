@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "Installing Terraform"
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin/
+      - terraform --version
+  build:
+    commands:
+      - echo "Starting Terraform actions"
+      #      - cd cloned_repo # Replace 'cloned_repo' with the actual directory name
+      - terraform init
+      - terraform validate
+      - terraform plan
+  post_build:
+    commands:
+      - echo "Terraform actions completed"
